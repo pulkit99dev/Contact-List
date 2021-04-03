@@ -45,7 +45,17 @@ app.post('/create-contact', (req, res)=>{
     return res.redirect('/');
 })
 
-app.get('/delete-contact')
+app.get('/delete-contact', (req, res)=>{
+  let phone = req.query.phone;
+  console.log(req.query);
+
+  let contactIndex = contactList.findIndex(contact => contact.phone == phone);
+
+  if(contactIndex != -1){
+    contactList.splice(contactIndex, 1);
+  }
+  res.redirect('/');
+})
 
 app.listen(port, (err) => {
   if (err) {
